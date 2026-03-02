@@ -2,36 +2,47 @@ from model.produto import Produto
 
 class ProdutoView:
     def menu_produtos(self):
-        print("\n--- produto ---")
-        print("1. cadastro produto")
-        print("2. atualizar produto")
-        print("3. listar produtos")
-        print("0. voltar")
-        return input("Escolha uma opção: ")
+        print(f"\n{' GESTÃO DE PRODUTOS ':=^30}")
+        print(f"║ {'[1] Cadastrar':<26} ║")
+        print(f"║ {'[2] Atualizar':<26} ║")
+        print(f"║ {'[3] Listar':<26} ║")
+        print(f"║ {'[0] Voltar':<26} ║")
+        print("="*30)
+        return input("  > : ")
 
     def cadastrar(self):
-        print("\n-- cadastro --")
+        print(f"\n{' NOVO PRODUTO ':-^30}")
         p = Produto()
-        p.codproduto = int(input("codigo: "))
-        p.nome = input("nome: ")
-        p.preco = float(input("preco: "))
-        return p
+        p.nome = input("  Nome do Produto: ")
+        try:
+            p.preco = float(input("  Preço: "))
+            return p
+        except ValueError:
+            print("Erro: Preço incorreto!")
+            return None
         
     def editar(self):
-        print("\n-- atualizar produto --")
+        print(f"\n{' ATUALIZAR PRODUTO ':-^30}")
         p = Produto()
-        p.codproduto = int(input("informe codigo para alterar: "))
-        p.nome = input("novo nome: ")
-        p.preco = float(input("novo preco: "))
-        return p
+        try:
+            p.codproduto = int(input("  Informe o ID do Produto: "))
+            p.nome = input("  Novo Nome: ")
+            p.preco = float(input("  Novo Preço: "))
+            return p
+        except ValueError:
+            print("Erro: Valores incorreto.")
+            return None
 
     def listar(self, produtos):
-        print("\n-- list all --")
+        print(f"\n{' LISTA DE PRODUTOS ':=^45}")
         if not produtos:
-            print("lista vazia")
+            print(f"{'A lista está vazia':^45}")
         else:
+            print(f"{'ID':<5} | {'NOME DO PRODUTO':<25} | {'PREÇO':>10}")
+            print("-" * 45)
             for p in produtos:
-                print(p)
+                print(f"{p.codproduto:<5} | {p.nome[:25]:<25} | R${p.preco:>8.2f}")
+        print("=" * 45)
 
     def mensagem(self, texto):
-        print(texto)
+        print(f"\n🔔 {texto}")

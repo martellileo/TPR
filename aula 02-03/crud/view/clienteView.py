@@ -2,42 +2,50 @@ from model.cliente import Cliente
 
 class ClienteView:
     def menu_cliente(self):
-        print("\n--- cliente ---")
-        print("1. cadastrar  cliente")
-        print("2. atualizar cliente")
-        print("3. listar clientes")
-        print("0. Voltar")
-        return input("Escolha uma opção: ")
+        print(f"\n{' GESTÃO DE CLIENTES ':=^30}")
+        print(f"║ {'[1] Cadastrar':<26} ║")
+        print(f"║ {'[2] Atualizar':<26} ║")
+        print(f"║ {'[3] Listar':<26} ║")
+        print(f"║ {'[0] Voltar':<26} ║")
+        print("="*30)
+        return input("  > : ")
     
-    def cadastrar(self): # verificar o codigo e/ou mudar pra auto increment
-        print("\n-- cadastro --")
+    def cadastrar(self):
+        print(f"\n{' NOVO CADASTRO ':-^30}")
         c = Cliente()
-        c.codcliente = int(input("codigo: "))
-        c.nome = input("nome: ")
-        c.endereco = input("endereco: ")
-        c.cidade = input("cidade: ")
-        c.uf = input("uf: ")
-        c.cep = input("cep: ")
+        c.nome = input("  Nome: ")
+        c.endereco = input("  Endereço: ")
+        c.cidade = input("  Cidade: ")
+        c.uf = input("  UF: ")
+        c.cep = input("  CEP: ")
         return c
         
     def editar(self):
-        print("\n-- atualizar produto --")
+        print(f"\n{' ATUALIZAR CLIENTE ':-^30}")
         c = Cliente()
-        c.codcliente = int(input("informe codigo para alterar: "))
-        c.nome = input("novo nome: ")
-        c.endereco = input("novo endereco: ")
-        c.cidade = input("nova cidade: ")
-        c.uf = input("novo uf: ")
-        c.cep = input("novo cep: ")
-        return c
+        try:
+            c.codcliente = int(input("  Informe o ID do Cliente: "))
+            c.nome = input("  Novo Nome: ")
+            c.endereco = input("  Novo Endereço: ")
+            c.cidade = input("  Nova Cidade: ")
+            c.uf = input("  Novo UF: ")
+            c.cep = input("  Novo CEP: ")
+            return c
+        except ValueError:
+            print("Erro: ID incorreto.")
+            return None
 
     def listar(self, clientes):
-        print("\n-- list all --")
+        print(f"\n{' LISTA DE CLIENTES ':=^60}")
         if not clientes:
-            print("lista vazia")
+            print(f"{'A lista está vazia':^60}")
         else:
+            print(f"{'ID':<4} | {'NOME':<20} | {'CIDADE/UF':<20} | {'CEP':<10}")
+            print("-" * 60)
             for c in clientes:
-                print(c)
+                cidade_uf = f"{c.cidade}/{c.uf}"
+                print(f"{c.codcliente:<4} | {c.nome[:20]:<20} | {cidade_uf[:20]:<20} | {c.cep:<10}")
+        print("=" * 60)
 
     def mensagem(self, texto):
-        print(texto)
+        print(f"\n🔔 {texto}")
