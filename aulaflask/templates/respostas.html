@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado da Tabuada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid #000;
+            padding: 8px 15px;
+        }
+
+        th {
+            background-color: #ddd;
+        }
+
+        /* Novas classes aplicando cor de fundo na linha da tabela */
+        .fundo-erro {
+            background-color: #ffcccc; /* Vermelho claro */
+        }
+        
+        .fundo-sucesso {
+            background-color: #ccffcc; /* Verde claro */
+        }
+
+        /* Classe para o input se misturar com o fundo colorido */
+        .input-transparente {
+            background-color: transparent; /* Fica da cor do fundo da tabela */
+            border: none; /* Tira a borda do input */
+            text-align: center;
+            font-size: 16px;
+            color: #000; /* Garante que a letra continue preta */
+            width: 100%;
+        }
+
+        /* Remove aquela borda de seleção ao clicar no input */
+        .input-transparente:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resultado</h1>
+    
+    <h2>Você acertou: {{ acerto }}</h2>
+    <h2>Você errou: {{ erro }}</h2>
+
+    <table>
+        <tr>
+            <th>Operação</th>
+            <th>Sua Resposta</th>
+        </tr>
+        {% for linha in detalhes %}
+        
+        <tr class="{% if linha.status == 'errou' %}fundo-erro{% else %}fundo-sucesso{% endif %}">
+            
+            <td> {{ linha.operacao }} </td>
+            
+            <td>
+                <input type="text" 
+                       class="input-transparente" 
+                       value="{{ linha.digitado }}" 
+                       readonly>
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/">Voltar</a>
+</body>
+</html>

@@ -1,0 +1,201 @@
+2024-04-06 10:13:47.039 -03 [2016] LOG:  starting PostgreSQL 14.4, compiled by Visual C++ build 1914, 64-bit
+2024-04-06 10:13:47.046 -03 [2016] LOG:  listening on IPv6 address "::", port 5432
+2024-04-06 10:13:47.046 -03 [2016] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2024-04-06 10:13:47.368 -03 [14860] LOG:  database system was shut down at 2024-04-06 10:13:45 -03
+2024-04-06 10:13:47.758 -03 [2016] LOG:  database system is ready to accept connections
+2024-04-06 10:14:26.731 -03 [4528] LOG:  connection received: host=201.49.205.91 port=24470
+2024-04-06 10:14:26.817 -03 [4528] LOG:  connection authenticated: identity="uspe3006981" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:14:26.817 -03 [4528] LOG:  connection authorized: user=uspe3006981 database=pe3006981 application_name=pgAdmin 4 - CONN:1250160
+2024-04-06 10:14:27.172 -03 [4528] ERROR:  relation "orcamento" does not exist at character 15
+2024-04-06 10:14:27.172 -03 [4528] STATEMENT:  select * from orcamento;
+2024-04-06 10:14:29.955 -03 [13040] LOG:  connection received: host=177.190.74.69 port=49351
+2024-04-06 10:14:30.005 -03 [13040] LOG:  connection authenticated: identity="vfmaziero" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:95)
+2024-04-06 10:14:30.005 -03 [13040] LOG:  connection authorized: user=vfmaziero database=pe3006697
+2024-04-06 10:14:31.904 -03 [13040] LOG:  disconnection: session time: 0:00:01.984 user=vfmaziero database=pe3006697 host=177.190.74.69 port=49351
+2024-04-06 10:14:43.429 -03 [4224] LOG:  connection received: host=100.64.153.70 port=61455
+2024-04-06 10:14:43.622 -03 [4224] LOG:  connection authenticated: identity="uspe3009581" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:14:43.622 -03 [4224] LOG:  connection authorized: user=uspe3009581 database=pe3009581
+2024-04-06 10:14:46.833 -03 [4224] LOG:  disconnection: session time: 0:00:03.439 user=uspe3009581 database=pe3009581 host=100.64.153.70 port=61455
+2024-04-06 10:14:49.909 -03 [3260] LOG:  connection received: host=177.190.74.69 port=49353
+2024-04-06 10:14:49.961 -03 [3260] LOG:  connection authenticated: identity="vfmaziero" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:95)
+2024-04-06 10:14:49.961 -03 [3260] LOG:  connection authorized: user=vfmaziero database=vfmaziero
+2024-04-06 10:14:57.700 -03 [3260] ERROR:  relation "caixa" does not exist at character 15
+2024-04-06 10:14:57.700 -03 [3260] STATEMENT:  select * from caixa
+2024-04-06 10:14:43.429 -03 [4224] LOG:  connection received: host=100.64.153.70 port=61455
+2024-04-06 10:14:30.005 -03 [13040] LOG:  connection authenticated: identity="vfmaziero" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:95)
+2024-04-06 10:14:30.005 -03 [13040] LOG:  connection authorized: user=vfmaziero database=pe3006697
+2024-04-06 10:15:07.871 -03 [3260] LOG:  disconnection: session time: 0:00:17.998 user=vfmaziero database=vfmaziero host=177.190.74.69 port=49353
+2024-04-06 10:15:07.999 -03 [12864] LOG:  connection received: host=177.190.74.69 port=49356
+2024-04-06 10:15:08.061 -03 [12864] LOG:  connection authenticated: identity="vfmaziero" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:95)
+2024-04-06 10:15:08.061 -03 [12864] LOG:  connection authorized: user=vfmaziero database=pe3006697
+2024-04-06 10:15:57.671 -03 [4528] ERROR:  function retornacliente(character varying) does not exist at character 1
+2024-04-06 10:15:57.671 -03 [4528] HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2024-04-06 10:15:57.671 -03 [4528] QUERY:  retornacliente(new.cpf) is null
+2024-04-06 10:15:57.671 -03 [4528] CONTEXT:  função PL/pgSQL gerarvenda() linha 11 em IF
+2024-04-06 10:15:57.671 -03 [4528] STATEMENT:  update orcamento set dataaprovacao = current_date where idorcamento = 1;
+2024-04-06 10:17:01.137 -03 [14376] LOG:  connection received: host=201.49.205.91 port=24432
+2024-04-06 10:17:01.190 -03 [14376] LOG:  connection authenticated: identity="uspe3006981" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:17:01.190 -03 [14376] LOG:  connection authorized: user=uspe3006981 database=pe3006981 application_name=pgAdmin 4 - DB:pe3006981
+2024-04-06 10:18:38.151 -03 [4528] ERROR:  null value in column "email" of relation "cliente" violates not-null constraint
+2024-04-06 10:18:38.151 -03 [4528] DETAIL:  Failing row contains (1, Igor Antonio, 9191919, null, null).
+2024-04-06 10:18:38.151 -03 [4528] CONTEXT:  SQL statement "insert into cliente (nome,cpf) values(new.nomecliente, new.cpf)"
+	função PL/pgSQL gerarvenda() linha 12 em comando SQL
+2024-04-06 10:18:38.151 -03 [4528] STATEMENT:  update orcamento set dataaprovacao = current_date where idorcamento = 1;
+2024-04-06 10:19:34.325 -03 [4528] ERROR:  null value in column "telefone" of relation "cliente" violates not-null constraint
+2024-04-06 10:19:34.325 -03 [4528] DETAIL:  Failing row contains (2, Igor Antonio, 9191919, Igor Antonio, null).
+2024-04-06 10:19:34.325 -03 [4528] CONTEXT:  SQL statement "insert into cliente (nome,cpf, email) values(new.nomecliente, new.cpf, new.nomecliente)"
+	função PL/pgSQL gerarvenda() linha 12 em comando SQL
+2024-04-06 10:19:34.325 -03 [4528] STATEMENT:  update orcamento set dataaprovacao = current_date where idorcamento = 1;
+2024-04-06 10:20:14.622 -03 [4528] ERROR:  column "vencimento" does not exist at character 130
+2024-04-06 10:20:14.622 -03 [4528] HINT:  There is a column named "vencimento" in table "pagamentovenda", but it cannot be referenced from this part of the query.
+2024-04-06 10:20:14.622 -03 [4528] QUERY:  insert into pagamentovenda (idpagamento, idvenda, idcaixa, vencimento, valor, formapagamento) 
+						   values(i, codigovenda, 0, vencimento, new.valototal/new.qtdparcelas, null)
+2024-04-06 10:20:14.622 -03 [4528] CONTEXT:  função PL/pgSQL gerarvenda() linha 19 em comando SQL
+2024-04-06 10:20:14.622 -03 [4528] STATEMENT:  update orcamento set dataaprovacao = current_date where idorcamento = 1;
+2024-04-06 10:20:25.999 -03 [13716] LOG:  connection received: host=100.64.153.70 port=61690
+2024-04-06 10:20:26.060 -03 [13716] LOG:  connection authenticated: identity="uspe3009581" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:20:26.060 -03 [13716] LOG:  connection authorized: user=uspe3009581 database=pe3009581
+2024-04-06 10:20:35.423 -03 [9308] LOG:  connection received: host=100.64.153.70 port=61693
+2024-04-06 10:20:35.469 -03 [9308] LOG:  connection authenticated: identity="uspe3009581" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:20:35.469 -03 [9308] LOG:  connection authorized: user=uspe3009581 database=pe3009581
+2024-04-06 10:20:41.802 -03 [9308] LOG:  disconnection: session time: 0:00:06.424 user=uspe3009581 database=pe3009581 host=100.64.153.70 port=61693
+2024-04-06 10:20:53.010 -03 [13716] ERROR:  column "idcompra" does not exist at character 105
+2024-04-06 10:20:53.010 -03 [13716] QUERY:  update produto set qtde = qtde + (select sum(qtde) from itemcompra where idcompra = new.idcompra) where idcompra = new.idcompra
+2024-04-06 10:20:53.010 -03 [13716] CONTEXT:  função PL/pgSQL atualizaritemcompra() linha 6 em comando SQL
+	SQL statement "insert into itemcompra values (i, compra, produto, valor, precoProduto(produto))"
+	função PL/pgSQL listaprodutos(integer,integer) linha 10 em comando SQL
+	SQL statement "call listaprodutos(3, new.idcompra)"
+	função PL/pgSQL atualizarcompra() linha 5 em CALL
+2024-04-06 10:20:53.010 -03 [13716] STATEMENT:  insert into compra values (1, 1, current_date, 0, 12)
+2024-04-06 10:21:59.209 -03 [3668] LOG:  connection received: host=186.219.74.20 port=22875
+2024-04-06 10:21:59.237 -03 [3668] LOG:  connection authenticated: identity="uspe3006697" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:21:59.237 -03 [3668] LOG:  connection authorized: user=uspe3006697 database=pe3006697
+2024-04-06 10:21:59.696 -03 [10308] LOG:  connection received: host=186.219.74.20 port=22894
+2024-04-06 10:21:59.742 -03 [10308] LOG:  connection authenticated: identity="uspe3006697" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:21:59.742 -03 [10308] LOG:  connection authorized: user=uspe3006697 database=pe3006697
+2024-04-06 10:22:03.584 -03 [10308] LOG:  disconnection: session time: 0:00:03.927 user=uspe3006697 database=pe3006697 host=186.219.74.20 port=22894
+2024-04-06 10:22:10.817 -03 [12136] LOG:  connection received: host=186.219.74.20 port=23292
+2024-04-06 10:22:10.838 -03 [12136] LOG:  connection authenticated: identity="uspe3006697" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:22:10.838 -03 [12136] LOG:  connection authorized: user=uspe3006697 database=pe3006697
+2024-04-06 10:22:11.022 -03 [12136] LOG:  disconnection: session time: 0:00:00.240 user=uspe3006697 database=pe3006697 host=186.219.74.20 port=23292
+2024-04-06 10:24:01.639 -03 [14076] LOG:  connection received: host=186.219.74.20 port=22541
+2024-04-06 10:24:01.678 -03 [14076] LOG:  connection authenticated: identity="uspe3006697" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:24:01.678 -03 [14076] LOG:  connection authorized: user=uspe3006697 database=pe3006697
+2024-04-06 10:26:54.285 -03 [4528] ERROR:  column "vencimento" does not exist at character 130
+2024-04-06 10:26:54.285 -03 [4528] HINT:  There is a column named "vencimento" in table "pagamentovenda", but it cannot be referenced from this part of the query.
+2024-04-06 10:26:54.285 -03 [4528] QUERY:  insert into pagamentovenda (idpagamento, idvenda, idcaixa, vencimento, valor, formapagamento) 
+						   values(i, codigovenda, 0, vencimento, new.valototal/new.qtdparcelas, null)
+2024-04-06 10:26:54.285 -03 [4528] CONTEXT:  função PL/pgSQL gerarvenda() linha 19 em comando SQL
+2024-04-06 10:26:54.285 -03 [4528] STATEMENT:  update orcamento set dataaprovacao = current_date where idorcamento = 1;
+2024-04-06 10:27:15.151 -03 [4528] ERROR:  insert or update on table "pagamentovenda" violates foreign key constraint "fk_pagamentovenda_caixa1"
+2024-04-06 10:27:15.151 -03 [4528] DETAIL:  Key (idcaixa)=(0) is not present in table "caixa".
+2024-04-06 10:27:15.151 -03 [4528] CONTEXT:  SQL statement "insert into pagamentovenda (idpagamento, idvenda, idcaixa, vencimento, valor, formapagamento) 
+						   values(i, codigovenda, 0, vencimentoVal, new.valototal/new.qtdparcelas, null)"
+	função PL/pgSQL gerarvenda() linha 19 em comando SQL
+2024-04-06 10:27:15.151 -03 [4528] STATEMENT:  update orcamento set dataaprovacao = current_date where idorcamento = 1;
+2024-04-06 10:27:43.009 -03 [4864] LOG:  connection received: host=186.219.74.20 port=22929
+2024-04-06 10:27:43.030 -03 [4864] LOG:  connection authenticated: identity="uspe3006697" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:27:43.030 -03 [4864] LOG:  connection authorized: user=uspe3006697 database=pe3006697
+2024-04-06 10:27:51.136 -03 [4528] ERROR:  INSERT has more target columns than expressions at character 79
+2024-04-06 10:27:51.136 -03 [4528] QUERY:  insert into pagamentovenda (idpagamento, idvenda, idcaixa, vencimento, valor, formapagamento) 
+						   values(i, codigovenda, vencimentoVal, new.valototal/new.qtdparcelas, null)
+2024-04-06 10:27:51.136 -03 [4528] CONTEXT:  função PL/pgSQL gerarvenda() linha 19 em comando SQL
+2024-04-06 10:27:51.136 -03 [4528] STATEMENT:  update orcamento set dataaprovacao = current_date where idorcamento = 1;
+2024-04-06 10:28:32.698 -03 [4528] ERROR:  null value in column "idcaixa" of relation "pagamentovenda" violates not-null constraint
+2024-04-06 10:28:32.698 -03 [4528] DETAIL:  Failing row contains (5, 1, null, 2024-04-06, 500.0000000000000000, null).
+2024-04-06 10:28:32.698 -03 [4528] CONTEXT:  SQL statement "insert into pagamentovenda (idpagamento, idvenda, vencimento, valor, formapagamento) 
+						   values(i, codigovenda, vencimentoVal, new.valototal/new.qtdparcelas, null)"
+	função PL/pgSQL gerarvenda() linha 19 em comando SQL
+2024-04-06 10:28:32.698 -03 [4528] STATEMENT:  update orcamento set dataaprovacao = current_date where idorcamento = 1;
+2024-04-06 10:29:25.727 -03 [15512] LOG:  connection received: host=186.219.74.20 port=23169
+2024-04-06 10:29:25.758 -03 [15512] LOG:  connection authenticated: identity="uspe3006697" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:29:25.758 -03 [15512] LOG:  connection authorized: user=uspe3006697 database=pe3006697
+2024-04-06 10:29:42.654 -03 [5244] LOG:  connection received: host=201.49.205.91 port=24530
+2024-04-06 10:29:42.705 -03 [5244] LOG:  connection authenticated: identity="uspe3006981" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:29:42.706 -03 [5244] LOG:  connection authorized: user=uspe3006981 database=pe3006981 application_name=pgAdmin 4 - DB:pe3006981
+2024-04-06 10:30:00.270 -03 [5244] ERROR:  column "idcaixa" is in a primary key
+2024-04-06 10:30:00.270 -03 [5244] STATEMENT:  ALTER TABLE IF EXISTS oficinanew.caixa
+	    ALTER COLUMN idcaixa DROP NOT NULL;
+2024-04-06 10:30:16.722 -03 [5244] ERROR:  column "idcaixa" is in a primary key
+2024-04-06 10:30:16.722 -03 [5244] STATEMENT:  ALTER TABLE IF EXISTS oficinanew.caixa
+	    ALTER COLUMN idcaixa DROP NOT NULL;
+2024-04-06 10:32:12.323 -03 [4528] ERROR:  insert or update on table "pagamentovenda" violates foreign key constraint "fk_pagamentovenda_caixa1"
+2024-04-06 10:32:12.323 -03 [4528] DETAIL:  Key (idcaixa)=(1) is not present in table "caixa".
+2024-04-06 10:32:12.323 -03 [4528] CONTEXT:  SQL statement "insert into pagamentovenda (idpagamento, idvenda, idcaixa, vencimento, valor, formapagamento) 
+						   values(i, codigovenda, 1, vencimentoVal, new.valototal/new.qtdparcelas, null)"
+	função PL/pgSQL gerarvenda() linha 19 em comando SQL
+2024-04-06 10:32:12.323 -03 [4528] STATEMENT:  update orcamento set dataaprovacao = current_date where idorcamento = 1;
+2024-04-06 10:32:31.201 -03 [7480] LOG:  connection received: host=186.219.74.20 port=23247
+2024-04-06 10:32:31.292 -03 [7480] LOG:  connection authenticated: identity="uspe3006697" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:32:31.292 -03 [7480] LOG:  connection authorized: user=uspe3006697 database=pe3006697
+2024-04-06 10:32:40.831 -03 [7480] LOG:  disconnection: session time: 0:00:09.674 user=uspe3006697 database=pe3006697 host=186.219.74.20 port=23247
+2024-04-06 10:33:39.667 -03 [1616] LOG:  connection received: host=186.219.74.20 port=23040
+2024-04-06 10:33:39.703 -03 [1616] LOG:  connection authenticated: identity="uspe3006697" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:33:39.703 -03 [1616] LOG:  connection authorized: user=uspe3006697 database=pe3006697
+2024-04-06 10:35:28.830 -03 [3668] ERROR:  more than one row returned by a subquery used as an expression
+2024-04-06 10:35:28.830 -03 [3668] CONTEXT:  SQL statement "INSERT INTO oficina.venda (idcliente, data, valortotal)
+
+	    VALUES ((SELECT idcliente FROM oficina.cliente WHERE cpf = NEW.cpf), NEW.dataaprovacao, NEW.valototal)
+
+	    RETURNING idvenda"
+	função PL/pgSQL gerar_venda() linha 12 em comando SQL
+2024-04-06 10:35:28.830 -03 [3668] STATEMENT:  UPDATE oficina.orcamento SET dataaprovacao = CURRENT_DATE WHERE idorcamento = 8
+2024-04-06 10:38:17.815 -03 [13716] ERROR:  column "idcompra" does not exist at character 1
+2024-04-06 10:38:17.815 -03 [13716] QUERY:  idcompra is not null
+2024-04-06 10:38:17.815 -03 [13716] CONTEXT:  função PL/pgSQL atualizaritemcompra() linha 5 em IF
+	SQL statement "insert into itemcompra values (i, compra, produto, valor, precoProduto(produto))"
+	função PL/pgSQL listaprodutos(integer,integer) linha 10 em comando SQL
+	SQL statement "call listaprodutos(3, new.idcompra)"
+	função PL/pgSQL atualizarcompra() linha 5 em CALL
+2024-04-06 10:38:17.815 -03 [13716] STATEMENT:  insert into compra values (1, 1, current_date, 0, 12)
+2024-04-06 10:38:18.109 -03 [13272] LOG:  connection received: host=100.64.153.70 port=61742
+2024-04-06 10:38:18.173 -03 [13272] LOG:  connection authenticated: identity="uspe3009581" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:38:18.173 -03 [13272] LOG:  connection authorized: user=uspe3009581 database=pe3009581
+2024-04-06 10:38:22.810 -03 [13272] LOG:  disconnection: session time: 0:00:04.736 user=uspe3009581 database=pe3009581 host=100.64.153.70 port=61742
+2024-04-06 10:38:39.352 -03 [11256] LOG:  connection received: host=201.49.205.91 port=24180
+2024-04-06 10:38:39.427 -03 [11256] LOG:  connection authenticated: identity="uspe3006981" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:38:39.427 -03 [11256] LOG:  connection authorized: user=uspe3006981 database=pe3006981 application_name=pgAdmin 4 - DB:pe3006981
+2024-04-06 10:39:42.861 -03 [7428] LOG:  connection received: host=201.49.205.91 port=24841
+2024-04-06 10:39:42.923 -03 [7428] LOG:  connection authenticated: identity="uspe3006981" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:39:42.923 -03 [7428] LOG:  connection authorized: user=uspe3006981 database=pe3006981 application_name=pgAdmin 4 - CONN:2997452
+2024-04-06 10:40:34.340 -03 [15076] LOG:  connection received: host=201.49.205.91 port=24063
+2024-04-06 10:40:34.392 -03 [15076] LOG:  connection authenticated: identity="uspe3006981" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:40:34.393 -03 [15076] LOG:  connection authorized: user=uspe3006981 database=pe3006981 application_name=pgAdmin 4 - CONN:2997452
+2024-04-06 10:40:34.447 -03 [7428] LOG:  disconnection: session time: 0:00:51.622 user=uspe3006981 database=pe3006981 host=201.49.205.91 port=24841
+2024-04-06 10:40:34.448 -03 [15076] LOG:  disconnection: session time: 0:00:00.143 user=uspe3006981 database=pe3006981 host=201.49.205.91 port=24063
+2024-04-06 10:42:27.336 -03 [9104] LOG:  connection received: host=201.49.205.91 port=23733
+2024-04-06 10:42:27.396 -03 [9104] LOG:  connection authenticated: identity="uspe3006981" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:42:27.396 -03 [9104] LOG:  connection authorized: user=uspe3006981 database=pe3006981 application_name=pgAdmin 4 - CONN:1250160
+2024-04-06 10:42:27.555 -03 [9104] ERROR:  relation "caixa_idcaixa_seq" does not exist at character 15
+2024-04-06 10:42:27.555 -03 [9104] STATEMENT:  select * from caixa_idcaixa_seq;
+2024-04-06 10:43:05.323 -03 [16032] LOG:  connection received: host=201.49.205.91 port=24804
+2024-04-06 10:43:05.382 -03 [16032] LOG:  connection authenticated: identity="uspe3006981" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:43:05.382 -03 [16032] LOG:  connection authorized: user=uspe3006981 database=pe3006981 application_name=pgAdmin 4 - CONN:5747654
+2024-04-06 10:44:20.637 -03 [10280] LOG:  connection received: host=201.49.205.91 port=23527
+2024-04-06 10:44:20.693 -03 [10280] LOG:  connection authenticated: identity="uspe3006981" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:44:20.693 -03 [10280] LOG:  connection authorized: user=uspe3006981 database=pe3006981 application_name=pgAdmin 4 - CONN:5747654
+2024-04-06 10:44:20.750 -03 [10280] LOG:  disconnection: session time: 0:00:00.149 user=uspe3006981 database=pe3006981 host=201.49.205.91 port=23527
+2024-04-06 10:44:20.750 -03 [16032] LOG:  disconnection: session time: 0:01:15.462 user=uspe3006981 database=pe3006981 host=201.49.205.91 port=24804
+2024-04-06 10:44:37.474 -03 [4732] LOG:  connection received: host=186.219.74.20 port=22930
+2024-04-06 10:44:37.494 -03 [4732] LOG:  connection authenticated: identity="uspe3006697" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:44:37.494 -03 [4732] LOG:  connection authorized: user=uspe3006697 database=pe3006697
+2024-04-06 10:44:37.742 -03 [4732] LOG:  disconnection: session time: 0:00:00.304 user=uspe3006697 database=pe3006697 host=186.219.74.20 port=22930
+2024-04-06 10:44:37.845 -03 [10000] LOG:  connection received: host=186.219.74.20 port=22960
+2024-04-06 10:44:37.880 -03 [10000] LOG:  connection authenticated: identity="uspe3006697" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:44:37.880 -03 [10000] LOG:  connection authorized: user=uspe3006697 database=pe3006697
+2024-04-06 10:44:38.055 -03 [14700] LOG:  connection received: host=186.219.74.20 port=22971
+2024-04-06 10:44:38.077 -03 [14700] LOG:  connection authenticated: identity="uspe3006697" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:44:38.077 -03 [14700] LOG:  connection authorized: user=uspe3006697 database=pe3006697
+2024-04-06 10:44:40.221 -03 [14700] LOG:  disconnection: session time: 0:00:02.201 user=uspe3006697 database=pe3006697 host=186.219.74.20 port=22971
+2024-04-06 10:44:53.622 -03 [13716] ERROR:  column "idcompra" does not exist at character 105
+2024-04-06 10:44:53.622 -03 [13716] QUERY:  update produto set qtde = qtde + (select sum(qtde) from itemcompra where idcompra = new.idcompra) where idcompra = new.idcompra
+2024-04-06 10:44:53.622 -03 [13716] CONTEXT:  função PL/pgSQL atualizaritemcompra() linha 6 em comando SQL
+	SQL statement "insert into itemcompra values (i, compra, produto, valor, precoProduto(produto))"
+	função PL/pgSQL listaprodutos(integer,integer) linha 10 em comando SQL
+	SQL statement "call listaprodutos(3, new.idcompra)"
+	função PL/pgSQL atualizarcompra() linha 5 em CALL
+2024-04-06 10:44:53.622 -03 [13716] STATEMENT:  insert into compra values (1, 1, current_date, 0, 12)
+2024-04-06 10:44:53.904 -03 [12236] LOG:  connection received: host=100.64.153.70 port=61752
+2024-04-06 10:44:54.121 -03 [12236] LOG:  connection authenticated: identity="uspe3009581" method=scram-sha-256 (C:/Program Files/PostgreSQL/14/data/pg_hba.conf:118)
+2024-04-06 10:44:54.121 -03 [12236] LOG:  connection authorized: user=uspe3009581 database=pe3009581
+2024-04-06 10:44:57.526 -03 [12236] LOG:  disconnection: session time: 0:00:03.658 user=uspe3009581 database=pe3009581 host=100.64.153.70 port=61752
