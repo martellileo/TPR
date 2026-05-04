@@ -7,3 +7,6 @@ dados/
 *.csv
 
 aula-02-03/crud/dados/*
+
+# Ignorar arquivos de ambiente em qualquer pasta
+.env

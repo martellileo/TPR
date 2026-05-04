@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - Frente Caixa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .navbar h1 {
+            font-size: 24px;
+        }
+        
+        .navbar-right a {
+            background-color: white;
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .carrinho-container {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .carrinho-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .carrinho-items {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .carrinho-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .item-carrinho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .item-info {
+            flex-grow: 1;
+        }
+        
+        .item-nome {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .item-preco {
+            font-size: 14px;
+            color: #2196F3;
+            font-weight: bold;
+        }
+        
+        .item-quantidade {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 20px;
+        }
+        
+        .qty-btn {
+            background-color: #f0f0f0;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .qty-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .item-total {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            min-width: 100px;
+            text-align: right;
+        }
+        
+        .item-remover {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .item-remover:hover {
+            background-color: #da190b;
+        }
+        
+        .resumo {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .resumo-titulo {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .resumo-linha {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #666;
+        }
+        
+        .resumo-linha:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .resumo-total {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2196F3;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn-finalizar {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: opacity 0.3s;
+        }
+        
+        .btn-finalizar:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-continuar {
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            padding: 15px;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .btn-continuar:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .carrinho-vazio {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .carrinho-vazio-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>🛒 Seu Carrinho</h1>
+        <a href="/">← Continuar Comprando</a>
+    </div>
+    
+    <div class="container">
+        <div class="carrinho-container">
+            <div class="carrinho-items">
+                <div class="carrinho-header">Itens do Carrinho</div>
+                <div id="items-container">
+                    <!-- Itens carregados via JavaScript -->
+                </div>
+            </div>
+            
+            <div class="resumo">
+                <div class="resumo-titulo">Resumo</div>
+                <div class="resumo-linha">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">R$ 0,00</span>
+                </div>
+                <div class="resumo-linha">
+                    <span>Quantidade de itens:</span>
+                    <span id="total-itens">0</span>
+                </div>
+                <div class="resumo-total">
+                    <span>Total:</span>
+                    <span id="total">R$ 0,00</span>
+                </div>
+                <button class="btn-finalizar" onclick="finalizarVenda()" id="btn-finalizar">
+                    ✓ Finalizar Venda
+                </button>
+                <button class="btn-continuar" onclick="window.location.href='/'">
+                    ← Continuar Comprando
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function carregarCarrinho() {
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            const container = document.getElementById('items-container');
+            
+            if (carrinho.length === 0) {
+                container.innerHTML = `
+                    <div class="carrinho-vazio">
+                        <div class="carrinho-vazio-icon">🛒</div>
+                        <h2>Carrinho vazio</h2>
+                        <p>Adicione produtos para começar a comprar</p>
+                    </div>
+                `;
+                document.getElementById('btn-finalizar').disabled = true;
+                return;
+            }
+            
+            let html = '';
+            let subtotal = 0;
+            let totalItens = 0;
+            
+            carrinho.forEach(item => {
+                const total = item.preco * item.quantidade;
+                subtotal += total;
+                totalItens += item.quantidade;
+                
+                html += `
+                    <div class="item-carrinho">
+                        <div class="item-info">
+                            <div class="item-nome">${item.nome}</div>
+                            <div class="item-preco">R$ ${item.preco.toFixed(2)}</div>
+                        </div>
+                        <div class="item-quantidade">
+                            <button class="qty-btn" onclick="alterarQuantidade(${item.id}, -1)">−</button>
+                            <span>${item.quantidade}</span>
+                            <button class="qty-btn" onclick="alterarQuantidade(${item.id}, 1)">+</button>
+                        </div>
+                        <div class="item-total">R$ ${total.toFixed(2)}</div>
+                        <button class="item-remover" onclick="removerDoCarrinho(${item.id})">
+                            ✕ Remover
+                        </button>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            
+            // Atualizar resumo
+            document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2)}`;
+            document.getElementById('total-itens').textContent = totalItens;
+            document.getElementById('total').textContent = `R$ ${subtotal.toFixed(2)}`;
+            document.getElementById('btn-finalizar').disabled = carrinho.length === 0;
+        }
+        
+        function alterarQuantidade(id, delta) {
+            let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            let item = carrinho.find(i => i.id === id);
+            
+            if (item) {
+                item.quantidade += delta;
+                if (item.quantidade <= 0) {
+                    removerDoCarrinho(id);
+                } else {
+                    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+                    carregarCarrinho();
+                }
+            }
+        }
+        
+        function removerDoCarrinho(id) {
+            let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            carrinho = carrinho.filter(item => item.id !== id);
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            carregarCarrinho();
+        }
+        
+        function finalizarVenda() {
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            
+            if (carrinho.length === 0) {
+                alert('Carrinho vazio!');
+                return;
+            }
+            
+            fetch('/finalizar-venda', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({itens: carrinho})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.sucesso) {
+                    alert('✓ Venda finalizada com sucesso!\nNúmero da venda: ' + data.idVenda);
+                    localStorage.removeItem('carrinho');
+                    window.location.href = '/';
+                } else {
+                    alert('Erro: ' + data.mensagem);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao finalizar venda');
+            });
+        }
+        
+        // Inicializar ao carregar
+        carregarCarrinho();
+    </script>
+</body>
+</html>

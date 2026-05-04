@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja - Frente Caixa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .navbar h1 {
+            font-size: 24px;
+        }
+        
+        .navbar-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .carrinho-link {
+            background-color: white;
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s;
+        }
+        
+        .carrinho-link:hover {
+            transform: scale(1.05);
+        }
+        
+        .carrinho-badge {
+            background-color: #f44336;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .admin-link {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .admin-link a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .admin-link a:hover {
+            background-color: #45a049;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .product-info {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            min-height: 40px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            font-size: 24px;
+            color: #2196F3;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .product-estoque {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+        
+        .add-cart-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: opacity 0.3s;
+            margin-top: auto;
+        }
+        
+        .add-cart-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .add-cart-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .empty-message {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .empty-message-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>🛍️ Loja Frente Caixa</h1>
+        <div class="navbar-right">
+            <a href="/admin" class="carrinho-link" style="background-color: rgba(255,255,255,0.2); color: white;">⚙️ Admin</a>
+            <a href="/carrinho" class="carrinho-link">
+                🛒 Carrinho
+                <span class="carrinho-badge" id="cart-count">0</span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="container">
+        {% if itens %}
+            <div class="products-grid">
+                {% for item in itens %}
+                    <div class="product-card">
+                        <div class="product-image">
+                            {% if item.imagem %}
+                                <img src="data:image/jpeg;base64,{{ item.imagem|b64encode }}" alt="{{ item.descricao }}">
+                            {% else %}
+                                <div class="product-image-placeholder">📦</div>
+                            {% endif %}
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">{{ item.descricao }}</h3>
+                            <div class="product-price">R$ {{ "%.2f"|format(item.precoVenda) }}</div>
+                            <div class="product-estoque">
+                                {% if item.qtde > 0 %}
+                                    ✓ Em estoque ({{ item.qtde }})
+                                {% else %}
+                                    ✗ Fora de estoque
+                                {% endif %}
+                            </div>
+                            <button class="add-cart-btn" 
+                                    onclick="adicionarAoCarrinho({{ item.idItem }}, '{{ item.descricao }}', {{ item.precoVenda }}, {{ item.qtde }})"
+                                    {% if item.qtde == 0 %}disabled{% endif %}>
+                                ➕ Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-message">
+                <div class="empty-message-icon">📭</div>
+                <h2>Nenhum produto disponível</h2>
+                <p>Acesse a área de administração para adicionar produtos</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Carregar carrinho ao iniciar
+        function carregarCarrinho() {
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            document.getElementById('cart-count').textContent = carrinho.length;
+        }
+
+        function adicionarAoCarrinho(id, nome, preco, estoque) {
+            if (estoque <= 0) {
+                alert('Produto fora de estoque');
+                return;
+            }
+
+            let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            
+            // Verificar se produto já existe
+            let existe = carrinho.find(item => item.id === id);
+            
+            if (existe) {
+                existe.quantidade++;
+            } else {
+                carrinho.push({
+                    id: id,
+                    nome: nome,
+                    preco: preco,
+                    quantidade: 1
+                });
+            }
+            
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            carregarCarrinho();
+            
+            // Animação de feedback
+            alert('✓ Produto adicionado ao carrinho!');
+        }
+
+        // Inicializar ao carregar a página
+        carregarCarrinho();
+    </script>
+</body>
+</html>

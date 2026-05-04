@@ -1,0 +1,41 @@
+-- Criando as tabelas na ordem correta para não dar erro de chave estrangeira
+
+-- 1. Limpa as tabelas antigas (na ordem reversa de dependência)
+DROP TABLE IF EXISTS `itemvenda`;
+DROP TABLE IF EXISTS `venda`;
+DROP TABLE IF EXISTS `item`;
+
+-- 2. Tabela venda (não depende de ninguém)
+CREATE TABLE `venda` (
+  `idVenda` int NOT NULL,
+  `data` datetime NOT NULL,
+  `precoTotal` decimal(8,2) NOT NULL,
+  `formaPagamento` varchar(50) NOT NULL,
+  `dataPagamento` datetime NOT NULL,
+  PRIMARY KEY (`idVenda`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 3. Tabela item (não depende de ninguém)
+CREATE TABLE `item` (
+  `idItem` int NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  `qtde` int NOT NULL,
+  `precoVenda` decimal(8,2) NOT NULL,
+  `precoCusto` decimal(8,2) NOT NULL,
+  `imagem` longblob NOT NULL,
+  PRIMARY KEY (`idItem`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 4. Tabela itemvenda (depende de venda e item, por isso é a última)
+CREATE TABLE `itemvenda` (
+  `idItemVenda` int NOT NULL,
+  `idVenda` int NOT NULL,
+  `idItem` int NOT NULL,
+  `qtde` int NOT NULL,
+  `precoVenda` decimal(8,2) NOT NULL,
+  PRIMARY KEY (`idItemVenda`),
+  KEY `idVenda` (`idVenda`),
+  KEY `idItem` (`idItem`),
+  CONSTRAINT `itemvenda_ibfk_1` FOREIGN KEY (`idVenda`) REFERENCES `venda` (`idVenda`),
+  CONSTRAINT `itemvenda_ibfk_2` FOREIGN KEY (`idItem`) REFERENCES `item` (`idItem`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

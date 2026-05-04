@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Itens - Frente Caixa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 28px;
+        }
+        
+        .btn-novo {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-novo:hover {
+            background-color: #45a049;
+        }
+        
+        .content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background-color: #667eea;
+            color: white;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .no-items {
+            padding: 40px;
+            text-align: center;
+            color: #999;
+            font-size: 18px;
+        }
+        
+        .preco {
+            color: #2196F3;
+            font-weight: bold;
+        }
+        
+        .quantidade {
+            background-color: #e3f2fd;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #1976d2;
+        }
+        
+        .tabela-vazia {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .tabela-vazia-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📦 Itens do Estoque</h1>
+            <a href="/novo-item" class="btn-novo">➕ Novo Item</a>
+        </div>
+        
+        <div class="content">
+            {% if itens %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Imagem</th>
+                            <th>ID</th>
+                            <th>Descrição</th>
+                            <th>Quantidade</th>
+                            <th>Preço Custo</th>
+                            <th>Preço Venda</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in itens %}
+                            <tr>
+                                <td>
+                                    {% if item.imagem %}
+                                        <img src="data:image/jpeg;base64,{{ item.imagem|b64encode }}" alt="{{ item.descricao }}" style="max-width: 60px; max-height: 60px; border-radius: 4px;">
+                                    {% else %}
+                                        <span style="color: #999;">Sem imagem</span>
+                                    {% endif %}
+                                </td>
+                                <td>#{{ item.idItem }}</td>
+                                <td>{{ item.descricao }}</td>
+                                <td><span class="quantidade">{{ item.qtde }}</span></td>
+                                <td class="preco">R$ {{ "%.2f"|format(item.precoCusto) }}</td>
+                                <td class="preco">R$ {{ "%.2f"|format(item.precoVenda) }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="tabela-vazia">
+                    <div class="tabela-vazia-icon">📭</div>
+                    <h2>Nenhum item cadastrado</h2>
+                    <p>Clique em "Novo Item" para começar a adicionar produtos ao estoque</p>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="footer">
+            <p>Total de itens: <strong>{{ itens|length }}</strong></p>
+        </div>
+    </div>
+</body>
+</html>
