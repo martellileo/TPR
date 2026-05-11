@@ -8,6 +8,7 @@ class Item(Base):
 
     idItem = Column(Integer, primary_key=True, autoincrement=True)
     descricao = Column(String(255))
+    tipo = Column(String(100))
     qtde = Column(Integer)
     precoVenda = Column(Float)
     precoCusto = Column(Float)

@@ -8,8 +8,8 @@ class ItemVenda(Base):
     idItemVenda = Column(Integer, primary_key=True, autoincrement=True)
     idVenda = Column(Integer, ForeignKey('venda.idVenda'))
     idItem = Column(Integer, ForeignKey('item.idItem'))
-    quantidade = Column(Integer)
-    precoUnitario = Column(Float)
+    quantidade = Column('qtde', Integer)
+    precoUnitario = Column('precoVenda', Float)
 
     venda = relationship("Venda")
     item = relationship("Item")

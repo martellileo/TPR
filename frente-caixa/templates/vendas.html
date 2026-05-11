@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Vendas - Frente Caixa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Vendas Realizadas</h1>
+            <a href="/admin">Voltar ao painel</a>
+        </header>
+
+        <div class="filter-container">
+            <form method="GET" action="/admin/listar_vendas" class="filter-form">
+                <label for="id-search" style="font-weight: bold;">Buscar por ID da Venda:</label>
+                <input type="number" id="id-search" name="id" placeholder="Digite o ID" value="{{ id_filtro }}" class="filter-input">
+                <button type="submit" class="filter-btn">Buscar</button>
+                {% if id_filtro %}
+                    <a href="/admin/listar_vendas" class="btn-clear">Limpar</a>
+                {% endif %}
+            </form>
+        </div>
+        {% if vendas %}
+            {% for venda in vendas %}
+                <article class="venda-card">
+                    <div class="venda-resumo">
+                        <div>
+                            <div class="label">Venda</div>
+                            <div class="valor">#{{ venda.idVenda }}</div>
+                        </div>
+                        <div>
+                            <div class="label">Data</div>
+                            <div class="valor">{{ venda.data.strftime('%d/%m/%Y') if venda.data else '-' }}</div>
+                        </div>
+                        <div>
+                            <div class="label">Pagamento</div>
+                            <div class="valor">{{ venda.formaPagamento }}</div>
+                        </div>
+                        <div>
+                            <!-- mudar pra itens nao quantidade total -->
+                            <div class="label">Itens</div>
+                            <div class="valor">{{ venda.totalItens }}</div>
+                        </div>
+                        <div>
+                            <div class="label">Total</div>
+                            <div class="valor">R$ {{ '%.2f'|format(venda.precoTotal or 0) }}</div>
+                        </div>
+                    </div>
+
+                    <details>
+                        <summary>Ver itens comprados</summary>
+                        <div class="itens">
+                            {% if venda.itens %}
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>ID Item</th>
+                                            <th>Descricao</th>
+                                            <th>Quantidade</th>
+                                            <th>Preco Unitario</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in venda.itens %}
+                                            <tr>
+                                                <td>{{ item.idItem }}</td>
+                                                <td>{{ item.descricao }}</td>
+                                                <td>{{ item.quantidade }}</td>
+                                                <td>R$ {{ '%.2f'|format(item.precoUnitario or 0) }}</td>
+                                                <td>R$ {{ '%.2f'|format(item.subtotal or 0) }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                <p>Nenhum item encontrado para esta venda.</p>
+                            {% endif %}
+                        </div>
+                    </details>
+                </article>
+            {% endfor %}
+        {% else %}
+            <div class="vazio">
+                <h2>Nenhuma venda encontrada</h2>
+                <p>As vendas realizadas aparecerao aqui com os detalhes de compra.</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

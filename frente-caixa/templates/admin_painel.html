@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Admin - Frente Caixa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .painel {
+            width: 100%;
+            max-width: 760px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 32px;
+        }
+
+        .topo {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .topo h1 {
+            color: #2d2d2d;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .topo p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .opcoes {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .opcao {
+            display: block;
+            text-decoration: none;
+            border-radius: 10px;
+            padding: 24px;
+            color: white;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            min-height: 150px;
+        }
+
+        .opcao:hover {
+            transform: translateY(-4px);
+            opacity: 0.95;
+        }
+
+        .opcao-itens {
+            background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
+        }
+
+        .opcao-vendas {
+            background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+            color: #332100;
+        }
+
+        .opcao strong {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .rodape {
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .rodape a {
+            color: #667eea;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        @media (max-width: 720px) {
+            .opcoes {
+                grid-template-columns: 1fr;
+            }
+
+            .painel {
+                padding: 24px;
+            }
+
+            .topo h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="painel">
+        <header class="topo">
+            <h1>Painel de Admin</h1>
+            <p>Escolha uma area para gerenciar o sistema.</p>
+        </header>
+
+        <section class="opcoes">
+            <a class="opcao opcao-itens" href="/admin/listar_itens">
+                <strong>Listar Itens</strong>
+                <span>Visualize e gerencie os produtos do estoque.</span>
+            </a>
+
+            <a class="opcao opcao-vendas" href="/admin/listar_vendas">
+                <strong>Listar Vendas</strong>
+                <span>Consulte as vendas e o detalhe de cada compra.</span>
+            </a>
+        </section>
+
+        <footer class="rodape">
+            <a href="/">Voltar para a loja</a>
+        </footer>
+    </main>
+</body>
+</html>

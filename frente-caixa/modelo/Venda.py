@@ -4,7 +4,7 @@ from database import Base
 class Venda(Base):
     __tablename__ = 'venda'
 
-    idVenda = Column(Integer, primary_key=True)
+    idVenda = Column(Integer, primary_key=True, autoincrement=True)
     data = Column(Date)
     precoTotal = Column(Float)
     formaPagamento = Column(String(50))
