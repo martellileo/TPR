@@ -74,10 +74,25 @@ def listar_vendas():
     db = Session()
     try:
         id_filtro = request.args.get('id', '').strip()
+        data_inicio = request.args.get('data_inicio', '').strip()
+        data_fim = request.args.get('data_fim', '').strip()
+        
+        query = db.query(VendaModel)
+        
         if id_filtro:
-            vendas = db.query(VendaModel).filter(VendaModel.idVenda == int(id_filtro)).all()
-        else:
-            vendas = db.query(VendaModel).order_by(VendaModel.idVenda.desc()).all()
+            query = query.filter(VendaModel.idVenda == int(id_filtro))
+        
+        if data_inicio:
+            from datetime import datetime as dt
+            data_inicio_obj = dt.strptime(data_inicio, '%Y-%m-%d').date()
+            query = query.filter(VendaModel.data >= data_inicio_obj)
+        
+        if data_fim:
+            from datetime import datetime as dt
+            data_fim_obj = dt.strptime(data_fim, '%Y-%m-%d').date()
+            query = query.filter(VendaModel.data <= data_fim_obj)
+        
+        vendas = query.order_by(VendaModel.idVenda.desc()).all()
         vendas_detalhadas = []
 
         for venda in vendas:
@@ -89,10 +104,8 @@ def listar_vendas():
             )
 
             itens_formatados = []
-            total_itens = 0
             for item_venda, item in itens_venda:
                 qtd = item_venda.quantidade or 0
-                total_itens += qtd
                 itens_formatados.append({
                     'idItem': item_venda.idItem,
                     'descricao': item.descricao if item else 'Item removido',
@@ -107,11 +120,11 @@ def listar_vendas():
                 'dataPagamento': venda.dataPagamento,
                 'formaPagamento': venda.formaPagamento,
                 'precoTotal': venda.precoTotal,
-                'totalItens': total_itens,
+                'totalItens': len(itens_formatados),
                 'itens': itens_formatados
             })
 
-        return render_template('vendas.html', vendas=vendas_detalhadas, id_filtro=id_filtro)
+        return render_template('vendas.html', vendas=vendas_detalhadas, id_filtro=id_filtro, data_inicio=data_inicio, data_fim=data_fim)
     finally:
         db.close()
 
@@ -119,6 +132,56 @@ def listar_vendas():
 @app.route('/novo-item', methods=['GET'])
 def novo_item():
     return render_template('novo_item.html')
+
+
+@app.route('/editar-item/<int:id>', methods=['GET'])
+def editar_item(id):
+    db = Session()
+    try:
+        item = db.query(Item).filter(Item.idItem == id).first()
+        if not item:
+            return redirect(url_for('listar_itens'))
+        return render_template('editar_item.html', item=item)
+    finally:
+        db.close()
+
+
+@app.route('/item/<int:id>', methods=['POST'])
+def atualizar_item(id):
+    descricao = request.form.get("descricao")
+    tipo = request.form.get("tipo")
+    qtde = request.form.get("qtde")
+    preco_venda = request.form.get("precoVenda")
+    preco_custo = request.form.get("precoCusto")
+    
+    with get_db() as db:
+        item = db.query(Item).filter(Item.idItem == id).first()
+        if item:
+            item.descricao = descricao
+            item.tipo = tipo
+            item.qtde = int(qtde)
+            item.precoVenda = float(preco_venda)
+            item.precoCusto = float(preco_custo)
+            
+            if 'imagem' in request.files:
+                arquivo = request.files['imagem']
+                if arquivo and arquivo.filename:
+                    item.imagem = arquivo.read()
+            
+            db.commit()
+    
+    return redirect(url_for('listar_itens'))
+
+
+@app.route('/remover-item/<int:id>', methods=['POST'])
+def remover_item(id):
+    with get_db() as db:
+        item = db.query(Item).filter(Item.idItem == id).first()
+        if item:
+            db.delete(item)
+            db.commit()
+    
+    return redirect(url_for('listar_itens'))
 
 
 @app.route('/carrinho')

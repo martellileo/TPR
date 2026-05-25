@@ -226,9 +226,77 @@
             font-size: 64px;
             margin-bottom: 20px;
         }
+        
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .toast {
+            background-color: #333;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            min-width: 300px;
+            animation: slideIn 0.3s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .toast.sucesso {
+            background-color: #4CAF50;
+        }
+        
+        .toast.erro {
+            background-color: #f44336;
+        }
+        
+        .toast.info {
+            background-color: #2196F3;
+        }
+        
+        .toast-icon {
+            font-size: 20px;
+        }
+        
+        .toast-mensagem {
+            flex: 1;
+            font-size: 14px;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="toast-container" id="toast-container"></div>
+    
     <div class="navbar">
         <h1>🛒 Seu Carrinho</h1>
         <a href="/">← Continuar Comprando</a>
@@ -268,6 +336,32 @@
     </div>
 
     <script>
+        function mostrarToast(mensagem, tipo = 'info') {
+            const container = document.getElementById('toast-container');
+            
+            const icons = {
+                'sucesso': '✓',
+                'erro': '✕',
+                'info': 'ℹ'
+            };
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${tipo}`;
+            toast.innerHTML = `
+                <span class="toast-icon">${icons[tipo]}</span>
+                <span class="toast-mensagem">${mensagem}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => {
+                    container.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+        
         function carregarCarrinho() {
             const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
             const container = document.getElementById('items-container');
@@ -347,7 +441,7 @@
             const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
             
             if (carrinho.length === 0) {
-                alert('Carrinho vazio!');
+                mostrarToast('Carrinho vazio!', 'erro');
                 return;
             }
             
@@ -361,16 +455,18 @@
             .then(response => response.json())
             .then(data => {
                 if (data.sucesso) {
-                    alert('✓ Venda finalizada com sucesso!\nNúmero da venda: ' + data.idVenda);
+                    mostrarToast('Venda finalizada com sucesso!', 'sucesso');
                     localStorage.removeItem('carrinho');
-                    window.location.href = '/';
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 2000);
                 } else {
-                    alert('Erro: ' + data.mensagem);
+                    mostrarToast('Erro: ' + data.mensagem, 'erro');
                 }
             })
             .catch(error => {
                 console.error('Erro:', error);
-                alert('Erro ao finalizar venda');
+                mostrarToast('Erro ao finalizar venda', 'erro');
             });
         }
         

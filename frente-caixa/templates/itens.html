@@ -68,6 +68,7 @@
                             <th>Quantidade</th>
                             <th>Preço Custo</th>
                             <th>Preço Venda</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,6 +87,10 @@
                                 <td><span class="quantidade">{{ item.qtde }}</span></td>
                                 <td class="preco">R$ {{ "%.2f"|format(item.precoCusto) }}</td>
                                 <td class="preco">R$ {{ "%.2f"|format(item.precoVenda) }}</td>
+                                <td>
+                                    <a href="/editar-item/{{ item.idItem }}" class="btn-editar" style="padding: 5px 10px; background: #4CAF50; color: white; text-decoration: none; border-radius: 4px; font-size: 12px;">✏️ Editar</a>
+                                    <button onclick="confirmarRemocao({{ item.idItem }}, '{{ item.descricao }}')" class="btn-remover" style="padding: 5px 10px; background: #f44336; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer; margin-left: 5px;">🗑️ Remover</button>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -103,5 +108,17 @@
             <p>Total de itens: <strong>{{ itens|length }}</strong></p>
         </div>
     </div>
+
+    <script>
+        function confirmarRemocao(id, descricao) {
+            if (confirm(`Tem certeza que deseja remover o item "${descricao}"? Esta ação não pode ser desfeita.`)) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `/remover-item/${id}`;
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+    </script>
 </body>
 </html>
